@@ -1,0 +1,73 @@
+<script>
+    $(function(){
+        
+        $('.attachment-add').click(function(){
+            $.ajax({
+                url:"<?=$this->Html->url(array("plugin"=>"nodeattachments","controller"=>"nodeattachment","action"=>"add"));?>",
+                success:function(data){
+                    $("#attachments").append(data);
+                }
+            })
+        });
+        
+        $('.attachment-delete').click(function(){
+            var row = $(this).parent().parent();
+            var id = row.attr('id').split('_')[1];
+            if (id > 0) {
+                $.ajax({
+                   url:"<?=$this->Html->url(array("plugin"=>"nodeattachments","controller"=>"nodeattachment","action"=>"remove"))?>/" + id,
+                   success:function(){
+                    row.remove();
+                   }
+                });
+            }
+            else
+            {
+            row.remove();
+            }
+        });
+        
+         $('.attachment-moveup').click(function(){
+            var row = $(this).parent().parent();
+            var id = row.attr('id').split('_')[1];
+            if (id > 0) {
+                $.ajax({
+                   url:"<?=$this->Html->url(array("plugin"=>"nodeattachments","controller"=>"nodeattachment","action"=>"moveup"))?>/" + id,
+                   success:function(){
+                    row.prev().before(row)
+                   }
+                });
+            }
+        });
+         
+         $('.attachment-movedown').click(function(){
+            var row = $(this).parent().parent();
+            var id = row.attr('id').split('_')[1];
+            if (id > 0) {
+                $.ajax({
+                   url:"<?=$this->Html->url(array("plugin"=>"nodeattachments","controller"=>"nodeattachment","action"=>"movedown"))?>/" + id,
+                   success:function(){
+                    row.next().after(row)
+                   }
+                });
+            }
+        });
+    });
+</script>
+
+
+<table class="table table-striped" id="attachments">
+    <tr><th>Attachment Title</th><th>Attachment File URL</th><th>Operations</th></tr>
+    
+    <?
+    if(isset($this->data['NodeAttachment'])){
+        foreach($this->data['NodeAttachment'] as $attachment){
+            $this->Attachment->row($attachment['title'],$attachment['url'],$attachment['id']);       
+        }
+    }
+    ?>
+    
+</table>
+
+
+<button class="btn attachment-add" onclick="return false;">Add Attachment</button>

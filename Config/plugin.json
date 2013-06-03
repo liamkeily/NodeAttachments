@@ -1,0 +1,14 @@
+{
+	"name": "NoteAttachments",
+	"description": "Allows you to add attachments to nodes",
+
+	"author": "Liam Keily",
+	"authorEmail": "liam@simplywebsites.com",
+	"authorUrl": "http://www.liamkeily.com",
+
+	"dependencies": {
+		"plugins": [
+		"ElFinder"
+		]
+	}
+}
