@@ -23,7 +23,7 @@ class NodeattachmentController extends NodeAttachmentsAppController {
             $this->loadModel('NodeAttachment');
         }
 
-	public function admin_add($title,$url){
+	public function admin_add(){
 		$title = $this->request->query['title'];
 		$url = $this->request->query['url'];
 		
