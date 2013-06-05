@@ -27,8 +27,6 @@ class NodeAttachmentComponent extends Component {
 						$controller->Security->unlockedFields[] = 'NodeAttachment.' . $uuid . '.' . $field;
 					}
 				}
-				
-				print_R($controller->Security->unlockedFields);
 			
 			}
 		}
