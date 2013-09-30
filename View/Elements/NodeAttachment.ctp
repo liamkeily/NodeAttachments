@@ -14,7 +14,7 @@ Attachments are a list of downloadable files that will appear under the content.
             filepicker.div = $("#attachments_finder");
             filepicker.elf = filepicker.div.elfinder({
                     // lang: 'ru',             // language (OPTIONAL)
-                    url : '/ElFinder/elfinder/php/connector.php'  // connector URL (REQUIRED)
+                    url : '<?php echo $this->Html->url(array('plugin'=>'el_finder','controller'=>'el_finder','action'=>'connector')) ?>'  // connector URL (REQUIRED)
             }).elfinder('instance');
         
             // Create a dialog for elfinder
@@ -27,7 +27,13 @@ Attachments are a list of downloadable files that will appear under the content.
                     var files = filepicker.div.find(".ui-selected").map( function() {
                         return filepicker.elf.path($(this).attr('id'));
                     }).get();
-                    
+
+			for(i in files){
+				<?php if(isset($is_teacher)){ ?>
+				files[i] = "uploads/" + files[i];
+				<?php }  ?>
+			}                   
+ 
                     filepicker.callback_function(files);
                     filepicker.dialog.dialog('close');
                 }
