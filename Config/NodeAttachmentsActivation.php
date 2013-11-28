@@ -53,7 +53,7 @@ class NodeAttachmentsActivation {
  */
   public function onDeactivation(&$controller) {
     $controller->Croogo->removeAco('NodeAttachment');
-    $this->_schema('drop');
+//    $this->_schema('drop');
 }
 		
 /**
@@ -76,11 +76,16 @@ class NodeAttachmentsActivation {
 			$schema = $schema->load();
 			foreach($schema->tables as $table => $fields) {
 			  if($action == 'create') {
+				$tables = $db->listSources();
+				if(in_array($tables,$table)){
 			  	$sql = $db->createSchema($schema, $table);
+				$db->execute($sql);
+				}
 			  } else {
   			  $sql = $db->dropSchema($schema, $table);
-			  }
 				$db->execute($sql);
+			  }
+
 			}
 		}
 	}
