@@ -70,7 +70,7 @@ Attachments are a list of downloadable files that will appear under the content.
                     for (file in files) {
                 
                         $.ajax({
-                            url:"<?php echo $this->Html->url(array("plugin"=>"node_attachments","controller"=>"nodeattachment","action"=>"add"));?>?url=" + encodeURIComponent(files[file]) + '&title=' + encodeURIComponent(files[file]),
+                            url:"<?php echo $this->Html->url(array("plugin"=>"node_attachments","controller"=>"node_attachment","action"=>"add"));?>?url=" + encodeURIComponent(files[file]) + '&title=' + encodeURIComponent(files[file]),
                             success:function(data){
                                 $("#attachments").append(data);
                             }
@@ -91,23 +91,12 @@ Attachments are a list of downloadable files that will appear under the content.
 <script>
     $(function(){
         
-        /*
-        $('.attachment-add').click(function(){
-            $.ajax({
-                url:"<?php echo $this->Html->url(array("plugin"=>"node_attachments","controller"=>"nodeattachment","action"=>"add"));?>",
-                success:function(data){
-                    $("#attachments").append(data);
-                }
-            })
-        });
-        */
-        
         $('table').on('click','.attachment-delete',function(){
             var row = $(this).parent().parent();
             var id = row.attr('id').split('_')[1];
             if (id > 0) {
                 $.ajax({
-                   url:"<?php echo $this->Html->url(array("plugin"=>"node_attachments","controller"=>"nodeattachment","action"=>"remove"))?>/" + id,
+                   url:"<?php echo $this->Html->url(array("plugin"=>"node_attachments","controller"=>"node_attachment","action"=>"remove"))?>/" + id,
                    success:function(){
                     row.remove();
                    }
@@ -124,7 +113,7 @@ Attachments are a list of downloadable files that will appear under the content.
             var id = row.attr('id').split('_')[1];
             if (id > 0) {
                 $.ajax({
-                   url:"<?php echo $this->Html->url(array("plugin"=>"node_attachments","controller"=>"nodeattachment","action"=>"moveup"))?>/" + id,
+                   url:"<?php echo $this->Html->url(array("plugin"=>"node_attachments","controller"=>"node_attachment","action"=>"moveup"))?>/" + id,
                    success:function(){
                     row.prev().before(row)
                    }
@@ -137,7 +126,7 @@ Attachments are a list of downloadable files that will appear under the content.
             var id = row.attr('id').split('_')[1];
             if (id > 0) {
                 $.ajax({
-                   url:"<?php echo $this->Html->url(array("plugin"=>"node_attachments","controller"=>"nodeattachment","action"=>"movedown"))?>/" + id,
+                   url:"<?php echo $this->Html->url(array("plugin"=>"node_attachments","controller"=>"node_attachment","action"=>"movedown"))?>/" + id,
                    success:function(){
                     row.next().after(row)
                    }
