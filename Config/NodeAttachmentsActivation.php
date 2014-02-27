@@ -77,7 +77,7 @@ class NodeAttachmentsActivation {
 			foreach($schema->tables as $table => $fields) {
 			  if($action == 'create') {
 				$tables = $db->listSources();
-				if(in_array($tables,$table)){
+				if(!in_array($table,$tables)){
 			  	$sql = $db->createSchema($schema, $table);
 				$db->execute($sql);
 				}
