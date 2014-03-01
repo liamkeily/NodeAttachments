@@ -20,9 +20,11 @@ class NodeAttachmentComponent extends Component {
 			Croogo::hookAdminTab('Nodes/admin_edit','Attachments','NodeAttachments.NodeAttachment');
 
 			if (!empty($controller->request->data)) {
-				foreach ($controller->request->data['NodeAttachment'] as $uuid => $fields) {
-					foreach ($fields as $field => $vals) {
-						$controller->Security->unlockedFields[] = 'NodeAttachment.' . $uuid . '.' . $field;
+				if(isset($controller->request->data['NodeAttachment']) && is_array($controller->request->data['NodeAttachment'])){
+					foreach ($controller->request->data['NodeAttachment'] as $uuid => $fields) {
+						foreach ($fields as $field => $vals) {
+							$controller->Security->unlockedFields[] = 'NodeAttachment.' . $uuid . '.' . $field;
+						}
 					}
 				}
 			}
